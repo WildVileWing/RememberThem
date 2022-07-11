@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Data 
+﻿public class Data 
 {
     public string name;
     public int level;

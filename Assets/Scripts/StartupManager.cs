@@ -21,9 +21,8 @@ public class StartupManager : MonoBehaviour
 
     public void OpenMenuScene()
     {
-        if ((DataManager.Name.Length < 4) || (DataManager.Name.Length > 12) || (DataManager.Name.ToLower() == "deprion"))
+        if ((DataManager.Name.Length < 3) || (DataManager.Name.Length > 12))
         {
-            Debug.Log("Short name");
             return;
         }
         SceneManager.LoadScene("MenuScene");
