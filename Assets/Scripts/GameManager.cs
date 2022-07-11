@@ -69,9 +69,8 @@ public class GameManager : MonoBehaviour
         }
         else if (counter == DataManager.Level-1)
         {
-            Debug.Log("Congrats");
             counter = 0;
-
+            SceneManager.LoadScene("GameScene");
             return;
         }
         else
