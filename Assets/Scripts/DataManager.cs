@@ -5,11 +5,13 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
 
+    // переделать в приватные поля
     public static string Name = "";
     public static int Level;
     public float DisappearingTime;
 
     private string DataPath;
+
     public void DataSave()
     {
         Data data = new Data(Name, Level, DisappearingTime);
@@ -45,5 +47,4 @@ public class DataManager : MonoBehaviour
         }
         DataLoad();
     }
-  
 }

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // добавить префаб и массив наполнять динамически
+
     public Button[] allButtons = new Button[40];
     private Button[] correctButtons;
     private List<int> uniqueNumbers = new List<int>();
@@ -22,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     public void ShowCells()
     {
+        // цикл и размер массива по значению из DataManager
+
+
         for(int i = 0; i < allButtons.Length; i++)
         {
             uniqueNumbers.Add(i);
@@ -56,8 +61,8 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < allButtons.Length; i++)
         {
-            int CopyI = i;
-            allButtons[CopyI].onClick.AddListener(() => CheckCell(allButtons[CopyI])); 
+            int copyI = i;
+            allButtons[copyI].onClick.AddListener(() => CheckCell(allButtons[copyI])); 
         }
 
     }
@@ -67,6 +72,8 @@ public class GameManager : MonoBehaviour
         if (button.GetComponentInChildren<TMP_Text>().text == counter.ToString()
             && (counter < DataManager.Level-1))
         {
+            // new Color исправить на цвет из инспектора
+
             button.image.color = new Color(37, 150, 190);
             button.GetComponentInChildren<TMP_Text>().enabled = true;
             button.enabled = false;
@@ -89,6 +96,7 @@ public class GameManager : MonoBehaviour
     IEnumerator ShowAndHideCells()
     {
         ShowCells();
+        // объявление new WaitForSeconds закешировать (тоже самое, что и с цветом)
         yield return new WaitForSeconds(3);
         HideCells();
         for(int i = 0; i < allButtons.Length; i++)

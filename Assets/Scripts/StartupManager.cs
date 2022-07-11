@@ -16,6 +16,7 @@ public class StartupManager : MonoBehaviour
 
     public void NameChangeCheck(string name)
     {
+        // сохранять имя только после проверки
         DataManager.Name = name;
     }
 
