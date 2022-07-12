@@ -10,19 +10,22 @@ public class StartupManager : MonoBehaviour
 
     private void Awake()
     {
+        if(DataManager.Instance.data.name != null)
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
         inputField.onValueChanged.AddListener(NameChangeCheck);
         confirmButton.onClick.AddListener(OpenMenuScene);
     }
 
     public void NameChangeCheck(string name)
     {
-        // сохранять имя только после проверки
-        DataManager.Name = name;
+        DataManager.Instance.data.name = name;
     }
 
     public void OpenMenuScene()
     {
-        if ((DataManager.Name.Length < 3) || (DataManager.Name.Length > 12))
+        if ((DataManager.Instance.data.name.Length < 3) || (DataManager.Instance.data.name.Length > 12))
         {
             return;
         }

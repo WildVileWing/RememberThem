@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        nameText.text = "Hello, " + DataManager.Name;
+        nameText.text = "Hello, " + DataManager.Instance.data.name;
         playButton.onClick.AddListener(OpenGameScene);
         dicePlayBtn.onClick.AddListener(() => SceneManager.LoadScene("DiceScene"));
     }

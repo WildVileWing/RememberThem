@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     int counter = 0;
     private void Awake()
     {
-        DataManager.Level = 10;
-        correctButtons = new Button[DataManager.Level];
+        DataManager.Instance.data.level = 10;
+        correctButtons = new Button[DataManager.Instance.data.level];
         StartCoroutine(ShowAndHideCells());
         addListenerToAllButtons();
 
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         {
             uniqueNumbers.Add(i);
         }
-        for(int i = 0; i < DataManager.Level; i++)
+        for(int i = 0; i < DataManager.Instance.data.level; i++)
         {
             int randomNumber = uniqueNumbers[Random.Range(0, uniqueNumbers.Count)];
             allButtons[randomNumber].image.color = Color.white;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void HideCells()
     {
-        for (int i = 0; i < DataManager.Level; i++)
+        for (int i = 0; i < DataManager.Instance.data.level; i++)
         {
             correctButtons[i].image.color = Color.gray;
             correctButtons[i].gameObject.GetComponentInChildren<TMP_Text>().enabled = false;
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     public void CheckCell(Button button)
     {
         if (button.GetComponentInChildren<TMP_Text>().text == counter.ToString()
-            && (counter < DataManager.Level-1))
+            && (counter < DataManager.Instance.data.level - 1))
         {
             // new Color исправить на цвет из инспектора
 
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
             button.enabled = false;
             counter++;
         }
-        else if (counter == DataManager.Level-1)
+        else if (counter == DataManager.Instance.data.level - 1)
         {
             counter = 0;
             SceneManager.LoadScene("GameScene");

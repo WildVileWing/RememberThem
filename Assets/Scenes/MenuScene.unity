@@ -791,8 +791,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1588551304}
   - component: {fileID: 1588551305}
+  - component: {fileID: 1588551306}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: MenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -828,6 +829,19 @@ MonoBehaviour:
   playButton: {fileID: 1897043836}
   dicePlayBtn: {fileID: 391029807}
   nameText: {fileID: 212931652}
+--- !u!114 &1588551306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588551303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127e733ae2b992b4d9ac1288933d7911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisappearingTime: 0
 --- !u!1 &1651824698
 GameObject:
   m_ObjectHideFlags: 0
