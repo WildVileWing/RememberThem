@@ -1,10 +1,8 @@
 {
-    "name": "DiceScene",
+    "name": "Plugins",
     "rootNamespace": "",
     "references": [
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:e1fc3c4aec1cb6d4abe6f79f4feeb0a0",
-        "GUID:be7b9ed73f58fa245b4a866f735f35ce"
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

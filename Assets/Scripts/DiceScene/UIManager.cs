@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Button startBtn, endBtn, homeBtn;
-    [SerializeField] private GameObject menuPanel, gamePanel;
+    [SerializeField] private Button startBtn, endBtn, homeBtn, chartBtn, chartCloseBtn;
+    [SerializeField] private GameObject menuPanel, gamePanel, chartPanel;
     [SerializeField] private TMP_Text endTxt, estNumTxt, currentNumTxt;
 
     private void Start()
@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour
         startBtn.onClick.AddListener(StartGame);
         endBtn.onClick.AddListener(EndGame);
         homeBtn.onClick.AddListener(() => SceneManager.LoadScene("MenuScene"));
+
+        chartBtn.onClick.AddListener(ChangeChartState);
+        chartCloseBtn.onClick.AddListener(ChangeChartState);
 
         EventManager.inst.GameCompleted += GameCompleted;
         EventManager.inst.EstimatedNumUpdate += EstimatedNumUpdate;
@@ -55,5 +58,13 @@ public class UIManager : MonoBehaviour
         currentNumTxt.text = null;
 
         EventManager.inst.EndGame();
+    }
+
+    private void ChangeChartState()
+    {
+        chartPanel.SetActive(!chartPanel.activeSelf);
+
+        if (chartPanel.activeSelf) menuPanel.SetActive(false);
+        else menuPanel.SetActive(true);
     }
 }
