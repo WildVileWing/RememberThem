@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+    // будет замечательно, если переделать в статичный класс/SO для простоты использования
     public static DataManager Instance { get; private set; }
 
     public Data data;
@@ -15,6 +16,7 @@ public class DataManager : MonoBehaviour
 
     public void DataLoad()
     {
+        // поменяй JsonUtility на JsonConvert. Он работает лучше - возможности шире
         if (File.Exists(DataPath))
         {
             data = JsonUtility.FromJson<Data>(File.ReadAllText(DataPath));
@@ -24,28 +26,31 @@ public class DataManager : MonoBehaviour
     }
     private void OnApplicationFocus(bool focus)
     {
-        if (!focus)
+        if (!focus) {
+            Statistics.SaveData();
             DataSave();
+         }
     }
 
     private void OnApplicationQuit()
     {
+        Statistics.SaveData();
         DataSave();
     }
     
     private void Awake()
     {
         Instance = this;
-        DataPath = Application.persistentDataPath + "/Data.json";
+        DontDestroyOnLoad(this);
 
+        DataPath = Application.persistentDataPath + "/Data.json";
         if (!File.Exists(DataPath))
         {
             DataSave();
             return;
         }
-        DontDestroyOnLoad(gameObject);
         DataLoad();
-
+        Statistics.LoadData();
     }
 
 
