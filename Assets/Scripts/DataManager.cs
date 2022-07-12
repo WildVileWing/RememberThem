@@ -3,27 +3,24 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager Instance;
+    public static DataManager Instance { get; private set; }
 
-    // переделать в приватные поля
-    public static string Name = "";
-    public static int Level;
-    public float DisappearingTime;
-
+    public Data data;
     private string DataPath;
 
     public void DataSave()
     {
-        Data data = new Data(Name, Level, DisappearingTime);
         File.WriteAllText(DataPath, JsonUtility.ToJson(data));
     }
 
     public void DataLoad()
     {
-        Data data = JsonUtility.FromJson<Data>(File.ReadAllText(DataPath));
-        Name = data.name;
-        Level = data.level;
-        DisappearingTime = data.disappearingTime;
+        if (File.Exists(DataPath))
+        {
+            data = JsonUtility.FromJson<Data>(File.ReadAllText(DataPath));
+            return;
+        }
+        data = new Data();
     }
     private void OnApplicationFocus(bool focus)
     {
@@ -35,16 +32,34 @@ public class DataManager : MonoBehaviour
     {
         DataSave();
     }
-
+    
     private void Awake()
     {
         Instance = this;
-        DataPath = Path.Combine(Application.persistentDataPath + "/Data.json");
+        DataPath = Application.persistentDataPath + "/Data.json";
+
         if (!File.Exists(DataPath))
         {
             DataSave();
             return;
         }
+        DontDestroyOnLoad(gameObject);
         DataLoad();
+
+    }
+
+
+    public class Data
+    {
+        public string name = "";
+        public int level = 0;
+        public int money = 0;
+        public Data() { }
+        public Data(string _name, int _level, int _money)
+        {
+            name = _name;
+            level = _level;
+            money = _money;
+        }
     }
 }
