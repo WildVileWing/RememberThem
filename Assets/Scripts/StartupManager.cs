@@ -10,7 +10,7 @@ public class StartupManager : MonoBehaviour
 
     private void Awake()
     {
-        if(DataManager.Instance.data.name != null)
+        if(!string.IsNullOrWhiteSpace(DataManager.Instance.data.name))
         {
             SceneManager.LoadScene("MenuScene");
         }
@@ -18,6 +18,7 @@ public class StartupManager : MonoBehaviour
         confirmButton.onClick.AddListener(OpenMenuScene);
     }
 
+    // не назначать имя до проверки
     public void NameChangeCheck(string name)
     {
         DataManager.Instance.data.name = name;
@@ -25,7 +26,8 @@ public class StartupManager : MonoBehaviour
 
     public void OpenMenuScene()
     {
-        if ((DataManager.Instance.data.name.Length < 3) || (DataManager.Instance.data.name.Length > 12))
+        if ((DataManager.Instance.data.name.Length < 3) ||
+            (DataManager.Instance.data.name.Length > 12))
         {
             return;
         }

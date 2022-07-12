@@ -26,10 +26,11 @@ public class DataManager : MonoBehaviour
     }
     private void OnApplicationFocus(bool focus)
     {
-        if (!focus) {
+        if (!focus)
+        {
             Statistics.SaveData();
             DataSave();
-         }
+        }
     }
 
     private void OnApplicationQuit()
@@ -55,7 +56,7 @@ public class DataManager : MonoBehaviour
 
     public class Data
     {
-        public string name = "";
+        public string name = null;
         public int level = 0;
         public int money = 0;
         public Data() { }
