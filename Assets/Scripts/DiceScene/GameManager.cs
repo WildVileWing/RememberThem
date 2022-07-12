@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public int NumEdges { get; private set; } = 6;
     public int EstimatedNum { get; private set; }
 
+    private int[] rolledEdges;
+
     private int diceSum = 0;
     private int diceRolled = 0;
 
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
     {
         diceSum = 0;
         diceRolled = 0;
+        rolledEdges = new int[NumDice * NumEdges];
 
         for (int i = 0; i < NumDice; i++)
         {
@@ -51,15 +54,18 @@ public class GameManager : MonoBehaviour
     {
         diceSum += value;
         diceRolled++;
+        rolledEdges[value - 1] += 1;
 
         events.CurrentNumUpdateInv(diceSum);
 
         if (diceRolled < NumDice) return;
 
+        Statistics.AddStatistic($"{NumEdges}Edges", rolledEdges);
+
         if (diceSum == EstimatedNum)
-            events.GameCompletedInv(true, 1f / maxEstimated);
+            events.GameCompletedInv(true, 1f / maxEstimated * 100);
         else
-            events.GameCompletedInv(false, 1f / maxEstimated);
+            events.GameCompletedInv(false, 1f / maxEstimated * 100);
     }
 
     public int NumDiceChange(int value)

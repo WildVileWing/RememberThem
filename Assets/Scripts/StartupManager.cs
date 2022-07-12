@@ -8,7 +8,7 @@ public class StartupManager : MonoBehaviour
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private Button confirmButton;
 
-    private void Awake()
+    private void Start()
     {
         if(!string.IsNullOrWhiteSpace(DataManager.Instance.data.name))
         {
