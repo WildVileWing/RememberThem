@@ -8,6 +8,7 @@ public static class Statistics
     private static Dictionary<string, string> statistic = new Dictionary<string, string>();
     private static string path = Application.persistentDataPath + 
         "/Statistics/Statistics.stat";
+    private static string separator = "/";
 
     public static string GetStatistic(string name)
     {
@@ -18,8 +19,41 @@ public static class Statistics
     }
     public static void SetStatistic(string key, string value)
     {
-        if (statistic.ContainsKey(key)) statistic[key] = value;
-        else statistic.Add(key, value);
+        statistic[key] = value;
+    }
+    public static void SetStatistic(string key, int[] value)
+    {
+        statistic[key] = JsonConvert.SerializeObject(value);
+    }
+    // Generic realisation net7.0
+    /*public static void AddStatistic<T>(string key, T value)
+    {
+        if (!statistic.ContainsKey(key))
+        {
+            statistic[key] = JsonConvert.SerializeObject(value);
+            return;
+        }
+
+        T oldValue = JsonConvert.DeserializeObject<T>(statistic[key]);
+
+        oldValue = Enumerable.Sum(oldValue, value);
+    }*/
+    public static void AddStatistic(string key, int[] value)
+    {
+        if (!statistic.ContainsKey(key))
+        {
+            statistic[key] = JsonConvert.SerializeObject(value);
+            return;
+        }
+
+        int[] oldValue = JsonConvert.DeserializeObject<int[]>(statistic[key]);
+
+        for (int i = 0; i < oldValue.Length; i++)
+        {
+            oldValue[i] += value[i];
+        }
+
+        statistic[key] = JsonConvert.SerializeObject(oldValue);
     }
 
     public static void SaveData()
