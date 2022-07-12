@@ -53,7 +53,6 @@ public class DataManager : MonoBehaviour
         Statistics.LoadData();
     }
 
-
     public class Data
     {
         public string name = "";
