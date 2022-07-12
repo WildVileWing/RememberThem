@@ -17,6 +17,20 @@ public static class Statistics
 
         return value;
     }
+    public static void GetStatistic<T>(string name, out T outValue)
+    {
+        string value;
+        statistic.TryGetValue(name, out value);
+
+        if (string.IsNullOrEmpty(value))
+        {
+            outValue = default;
+            return;
+        }
+
+        T returnValue = JsonConvert.DeserializeObject<T>(value);
+        outValue = returnValue;
+    }
     public static void SetStatistic(string key, string value)
     {
         statistic[key] = value;
