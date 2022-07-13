@@ -8,18 +8,18 @@ public class StartupManager : MonoBehaviour
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private Button confirmButton;
 
-    private void Start()
+    private void Start()    
     {
+        //Может быть if(DataManager.Instance.data != null) ? 
         if(!string.IsNullOrWhiteSpace(DataManager.Instance.data.name))
         {
             SceneManager.LoadScene("MenuScene");
         }
-        inputField.onValueChanged.AddListener(NameChangeCheck);
+        inputField.onValueChanged.AddListener(SetName);
         confirmButton.onClick.AddListener(OpenMenuScene);
     }
 
-    // не назначать имя до проверки
-    public void NameChangeCheck(string name)
+    public void SetName(string name)
     {
         DataManager.Instance.data.name = name;
     }

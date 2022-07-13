@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class DataManager : MonoBehaviour
 {
@@ -11,18 +12,29 @@ public class DataManager : MonoBehaviour
 
     public void DataSave()
     {
-        File.WriteAllText(DataPath, JsonUtility.ToJson(data));
+        if (data != null)
+        {
+            if ((this.data.name.Length >= 3) && (this.data.name.Length <= 12))
+            {
+                
+                File.WriteAllText(DataPath, JsonUtility.ToJson(data));
+            }
+            return;
+        }
+        data = new Data();
+
     }
 
     public void DataLoad()
     {
-        // поменяй JsonUtility на JsonConvert. Он работает лучше - возможности шире
+      
         if (File.Exists(DataPath))
         {
-            data = JsonUtility.FromJson<Data>(File.ReadAllText(DataPath));
+            data = JsonConvert.DeserializeObject<Data>(File.ReadAllText(DataPath));
             return;
         }
         data = new Data();
+
     }
     private void OnApplicationFocus(bool focus)
     {
@@ -43,7 +55,6 @@ public class DataManager : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(this);
-
         DataPath = Application.persistentDataPath + "/Data.json";
         if (!File.Exists(DataPath))
         {

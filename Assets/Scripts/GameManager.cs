@@ -9,16 +9,19 @@ public class GameManager : MonoBehaviour
 {
     // добавить префаб и массив наполнять динамически
 
-    public Button[] allButtons = new Button[40];
+    public Button[] allButtons = new Button[36];
     private Button[] correctButtons;
     private List<int> uniqueNumbers = new List<int>();
+    [SerializeField] private Button homeButton;
     int counter = 0;
     private void Awake()
     {
         DataManager.Instance.data.level = 10;
         correctButtons = new Button[DataManager.Instance.data.level];
+        homeButton.onClick.AddListener(() => SceneManager.LoadScene("MenuScene"));
         StartCoroutine(ShowAndHideCells());
         addListenerToAllButtons();
+        
 
     }
 
