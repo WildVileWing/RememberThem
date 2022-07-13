@@ -40,10 +40,10 @@ public class Dice : MonoBehaviour
         {
             yield return waitTime;
 
-            var temp = Random.Range(1f, edges);
+            var temp = Random.Range(1, edges + 1);
 
-            if (temp == index) index = (int)Random.Range(1f, edges);
-            else index = (int)temp;
+            if (temp == index) index = Random.Range(1, edges + 1);
+            else index = temp;
 
             text.text = index.ToString();
             //image.sprite = sprites[index];
