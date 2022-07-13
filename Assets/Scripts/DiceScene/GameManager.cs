@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < NumDice; i++)
         {
-            Instantiate(DicePrefab, parent, false);
+            var obj = Instantiate(DicePrefab, parent, false);
+            obj.GetComponent<Dice>().Init(NumEdges);
         }
     }
     private void EndGame()
@@ -81,11 +82,9 @@ public class GameManager : MonoBehaviour
     }
     public int NumEdgesChange(int value)
     {
-        var temp = NumEdges + value;
+        if (value < minNumEdges || value > maxNumEdges) return NumEdges;
 
-        if (temp < minNumEdges || temp > maxNumEdges) return NumEdges;
-
-        NumEdges = temp;
+        NumEdges = value;
         RecalculateEst();
 
         return NumEdges;

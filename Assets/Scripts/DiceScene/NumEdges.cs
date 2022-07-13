@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class NumEdges : MonoBehaviour
 {
+    [SerializeField] private int[] edges;
+    private int index = 1;
+
     [SerializeField] private Button lowerBtn, higherBtn;
     [SerializeField] private TMP_Text numTxt;
     private GameManager gm;
@@ -15,10 +18,14 @@ public class NumEdges : MonoBehaviour
 
         lowerBtn.onClick.AddListener(() => ChangeDiceCount(-1));
         higherBtn.onClick.AddListener(() => ChangeDiceCount(1));
+
+        ChangeDiceCount(0);
     }
 
     private void ChangeDiceCount(int value)
     {
-        numTxt.text = gm.NumEdgesChange(value).ToString();
+        index = index + value >= edges.Length ? edges.Length - 1 : index + value < 0 ? 0 : index + value;
+
+        numTxt.text = gm.NumEdgesChange(edges[index]).ToString();
     }
 }
