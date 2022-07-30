@@ -13,12 +13,8 @@ public class DataManager : MonoBehaviour
     public void DataSave()
     {
         if (data != null)
-        {
-            if ((this.data.name.Length >= 3) && (this.data.name.Length <= 12))
-            {
-                
-                File.WriteAllText(DataPath, JsonUtility.ToJson(data));
-            }
+        {          
+            File.WriteAllText(DataPath, JsonUtility.ToJson(data));
             return;
         }
         data = new Data();

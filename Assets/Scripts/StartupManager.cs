@@ -21,7 +21,12 @@ public class StartupManager : MonoBehaviour
 
     public void SetName(string name)
     {
-        DataManager.Instance.data.name = name;
+        if(name.Length >= 3 ||
+            name.Length <= 12)
+        {
+            DataManager.Instance.data.name = name;
+        }
+        
     }
 
     public void OpenMenuScene()
